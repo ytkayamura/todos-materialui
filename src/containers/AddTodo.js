@@ -1,8 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { addTodo } from '../actions'
+import Button from 'material-ui/Button';
+import { withStyles } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
 
-let AddTodo = ({ dispatch }) => {
+const styles = {
+  inputTodo: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+};
+let AddTodo = ({ dispatch, classes }) => {
   let input
 
   return (
@@ -15,16 +25,18 @@ let AddTodo = ({ dispatch }) => {
         dispatch(addTodo(input.value))
         input.value = ''
       }}>
-        <input ref={node => {
-          input = node
-        }} />
-        <button type="submit">
-          Add Todo
-        </button>
+        <div className={classes.inputTodo}>
+          <TextField label="input todo"
+            inputRef={node => {
+              input = node
+            }}
+          />
+          <Button variant="raised" type="submit">
+            Add Todo
+          </Button>
+        </div>
       </form>
     </div>
   )
 }
-AddTodo = connect()(AddTodo)
-
-export default AddTodo
+export default compose(connect(), withStyles(styles))(AddTodo)

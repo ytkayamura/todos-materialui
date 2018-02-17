@@ -1,21 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Button from 'material-ui/Button';
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
-    return <span>{children}</span>
+    return <Button disabled style={{ color: 'red' }}>{children}</Button>
   }
 
   return (
     // eslint-disable-next-line
-    <a href="#"
-       onClick={e => {
-         e.preventDefault()
-         onClick()
-       }}
-    >
-      {children}
-    </a>
+    <Button href="#"
+      onClick={e => {
+        e.preventDefault()
+        onClick()
+      }}
+    >{children}</Button>
   )
 }
 
